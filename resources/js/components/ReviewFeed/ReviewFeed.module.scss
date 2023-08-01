@@ -1,0 +1,42 @@
+.review {
+    &:last-child {
+        >.divider {
+            display: none;
+        }
+    }
+}
+
+.info {
+    margin: 0 15.71em 0 .88em ;
+}
+
+.name {
+    font-weight: 500;
+    margin-bottom: .64em;
+}
+
+.title {
+    margin-top: 1.5em;
+    font-size: 1.14em;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+.description {
+    margin: .85em 0;
+    color: #697586;
+    font-family: Montserrat;
+    line-height: 22px;
+}
+
+.images {
+    >img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+    }
+}
+
+.divider {
+    margin: 2.14em 0;
+}

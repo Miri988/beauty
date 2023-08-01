@@ -1,0 +1,215 @@
+@import url(form.scss);
+@import url(header.scss);
+@import url(footer.scss);
+@import url(icofont.min.css);
+@import url(item_card.scss);
+@import url(slider.scss);
+@import url(blog_card.scss);
+@import url(accordion.scss);
+@import url(filter.scss);
+@import url(product.scss);
+
+
+:root {
+    --side-padding: 352px;
+}
+
+div {
+    position: relative;
+}
+
+input, textarea {
+    outline: none;
+    &::placeholder {
+        color: #B0A6BD;
+    }
+}
+
+body {
+    background-color: #FCFCFF;
+    font-size: 14px;
+    margin: 0 auto;
+    color: #383838;
+}
+
+a {
+    text-decoration: none;
+}
+
+a, a:visited, a:hover, a:active {
+    color: inherit;
+}
+
+//все кнопки
+button {
+    background-color: #F5A3B7;
+    border-radius: 4px;
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: .6em .8em;
+    cursor: pointer;
+    &.fluid {
+        width: 100%;
+    }
+    &.secondary {
+        padding: .8em .8em;
+        color: black;
+        border: 1px solid black;
+        background-color: transparent;
+        &:hover {
+            color: white;
+            background-color: black;
+        }
+    }
+    &.wide {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+//все card - окна для регистрации и входа
+.card {
+    &.auth {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    background-color: white;
+    box-shadow: 0px 2px 20px rgba(176, 166, 189, 0.15);
+    border-radius: 6px;
+    padding: 3rem 6rem;
+}
+
+//header в форме
+.header {
+    font-size: 1.2em;
+    font-weight: 600;
+    &:not(:last-child) {
+        margin-bottom: 1em;
+    }
+    .subheader {
+        font-size: .62em;
+        font-weight: 400;
+        color: #B0A6BD;
+        text-transform: none;
+    }
+    >img {
+        margin: 0 .6em;
+        &:first-child {
+            margin-left: 0;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    &.heavier {
+        font-weight: 700;
+    }
+}
+
+.large {
+    font-size: 1.5em;
+}
+
+.larger {
+    font-size: 1.7em;
+}
+
+.aligned {
+    &.center {
+        text-align: center;
+    }
+}
+
+//уведомления
+.message {
+    padding: .6em .8em;
+    border-radius: 4px;
+    font-size: .75em;
+    margin-top: .8em;
+    
+    &.red {
+        color: #E77373;
+        background-color: rgba(240, 154, 155, 0.1);
+       
+    }
+
+}
+
+.flex {
+    display: flex;
+    &.centered {
+        align-items: center;
+    }
+}
+
+.pink {
+    color: #F5A3B7;
+}
+
+.grey {
+    color: #BFB9CF;
+}
+
+.upper {
+    text-transform: uppercase;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.link {
+    opacity: .8;
+    cursor: pointer;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.image {
+    &.square {
+        >.content {
+            height: 0;
+            padding-bottom: 100%;
+            &.posts {
+                img {
+                    height: fit-content;
+                    position: relative;
+                }
+            }
+        }
+    }
+    &.rectangle {
+        >.content {
+            height: 0;
+            padding-bottom: 60%;
+        }
+    }
+    
+    img {
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.kits {
+    padding: 5.71em 0 0;
+}
+
+.segment {
+    padding: 1em;
+    &.secondary {
+        background-color: white;
+        box-shadow: 0px 2px 20px rgba(176, 166, 189, 0.15);
+        border-radius: 6px;
+    }
+}
+
+.margin {
+    margin-bottom: 2.14em;
+}

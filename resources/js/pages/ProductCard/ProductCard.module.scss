@@ -1,0 +1,67 @@
+.main {
+    padding: 0 var(--side-padding);
+    padding-top: 1em;
+    padding-bottom: 3em;
+}
+
+.header {
+    font-size: 1.6em;
+    margin-bottom: 0 !important;
+}
+
+.starts {
+    margin: 6px 0;
+}
+
+.rate {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    color: #697586;
+}
+
+.price {
+    font-weight: 500;
+    line-height: 27px;
+    font-size: 1.14em;
+    margin-bottom: 20px;
+}
+
+.description {
+    color: #697586;
+    line-height: 22px;
+    margin-bottom: 0;
+}
+
+.size {
+    margin: 6px 0;
+    color: #697586;
+    line-height: 22px;
+}
+
+.btn {
+    margin: 20px 0;
+}
+
+.review {
+    margin: 5.71em 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.42em;
+}
+
+.margin {
+    margin-bottom: 2.14em;
+}
+
+.like {
+    margin: 5.71em 0;
+}
+
+.recently {
+    margin: 5.71em 0;
+}
+
