@@ -27,7 +27,8 @@ return new class extends Migration
             $table->text('specification');
             $table->text('ingredients');
             $table->text('use');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

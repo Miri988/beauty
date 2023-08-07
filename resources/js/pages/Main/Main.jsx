@@ -7,13 +7,23 @@ import { Quiz } from "../../containers/Quiz/Quiz.jsx";
 import { UpperBanner } from "../../containers/UpperBanner/UpperBanner";
 import IMAGEkits from "../../assets/images/IMAGEkits.png";
 import IMAGEkits2 from "../../assets/images/IMAGEkits2.png";
+import { useSelector } from "react-redux";
+
 
 export const Main = () => {
+
+  const mainData = useSelector(s => s.mainData)
+  // const r = await fetch('http://127.0.0.1:8000/api/products/new_arrival')
+  // const j = await r.json()
+  // mainData.loaded = true
+  // mainData.newArrivals = j
+  // console.log(mainData);
+
   const kits1 = {
     header: 'Blossom Glow Kit',
     description: `Reveal your skin's natural glow with our Lotus Glow Kit. Nourishing body and face creams with lotus extract 
     provide deep hydration and rejuvenation. Suitable for all skin types. Vegan, cruelty-free, eco-friendly.`,
-    image: {IMAGEkits},
+    image: IMAGEkits,
     labels: [
       'GreatGift',
       'AntiAging',
@@ -26,7 +36,7 @@ export const Main = () => {
   const kits2 = {
     header: 'Floral Essence Masks Sets',
     description: `Indulge in the beauty of nature with our Floral Essence Masks set. Each mask features a unique blend of flower extracts to hydrate and nourish your skin. Experience the essence of flowers in your skincare routine.`,
-    image: {IMAGEkits2},
+    image: IMAGEkits2,
     labels: [
       'GreatGift',
       'AntiAging',

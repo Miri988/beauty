@@ -3,10 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Service\InitService;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
+
+    protected $initService;
+
+    public function __construct(InitService $initService)
+    {
+        $this->initService = $initService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -28,7 +38,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $products = Product::all() -> paginate(15);
     }
 
     /**
@@ -62,4 +72,16 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function addCard(Product $product)
+    {
+        //
+    }
+
+    public function newArrival (Product $product)
+    {
+        return $this->initService->getData();
+    }
+
+
 }

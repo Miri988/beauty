@@ -18,7 +18,7 @@ export const Insta = () => {
             <div className={styles.post} key={i}> 
                 <div className="square image">
                     <div className="content posts">
-                        <img type="text" src={(`assets/images/in${i+1}.png`)} alt = ""/>
+                        <img type="text" src={(`/assets/images/in${i+1}.png`)} alt = ""/>
                     </div>
                 </div>
                 <div className={styles.cover}>

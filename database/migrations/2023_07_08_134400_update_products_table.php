@@ -18,7 +18,6 @@ return new class extends Migration
         Schema::table('products', function (Blueprint $table) {
             $table->after('use', function (Blueprint $table) {
                 $table->foreignIdFor(Category::class)->constrained();
-                $table->foreignIdFor(Image::class)->constrained();   
             });
         });
     }
@@ -29,7 +28,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropForeign(['category_id', 'image_id']); 
+            $table->dropForeign(['category_id']); 
         });
     }
 };
