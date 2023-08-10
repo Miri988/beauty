@@ -22,6 +22,9 @@ class Product extends Model
         'size',
         'quantity',
         'vendor_code',
+        'specification',
+        'ingredients',
+        'use',
     ];
 
     public function category (): HasOne

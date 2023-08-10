@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function signup (UserSignupRequest $request)
+    public function signUp (UserSignupRequest $request)
     {
         $user = User::create([
             'first_name' => $request -> post ('first_name'),
@@ -21,7 +21,7 @@ class AuthController extends Controller
             'role_id' => 3,
         ]);
 
-        $token = $user -> createToken('auth_token') ->plainTextToken;
+        $token = $user -> createToken('auth_token') -> plainTextToken;
 
         return response() -> json([
             'access_token' => $token,
@@ -29,7 +29,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function login (UserLoginRequest $request)
+    public function logIn (UserLoginRequest $request)
         {
             if (!Auth::attempt($request -> only('email', 'password'))) 
             {
@@ -41,7 +41,7 @@ class AuthController extends Controller
                 );
             }
 
-            $user = User:: where('email', $request -> post('email'));
+            $user = User::where('email', $request -> post('email'));
 
             $token = $user -> createToken('auth_token') -> plainTextToken;
 
@@ -56,15 +56,15 @@ class AuthController extends Controller
         return $request -> user();
     }
 
-    public function logout(Request $request)
+    public function logOut(Request $request)
     {
         $request -> user() -> currentAccessToken() -> delete();
         return response() -> noContent();
     }
 
-    public function logoutAll (Request $request)
+    public function logOutAll (Request $request)
     {
-        $request -> user() ->tokens() -> delete();
+        $request -> user() -> tokens() -> delete();
         return response() -> noContent();
 
     }
