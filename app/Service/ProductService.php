@@ -2,11 +2,12 @@
 
 namespace App\Service;
 
-use App\Dto\ProductDto;
 use Closure;
+use App\Dto\ProductDto;
 use App\Models\Product;
-use Illuminate\Database\Eloquent\Collection;
+use App\Dto\ProductCardDto;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProductService
@@ -24,10 +25,32 @@ class ProductService
         });
     }
 
-    public function getBestsellers () : Collection
+    public function getBestsellers ()
     {
-        return Product::orderBy('id', 'asc') -> take(8) -> get() -> map(function ($el) {
+        return Product::orderBy('rating', 'desc') -> take(8) -> get() -> map(function ($el) {
             return new ProductDto($el);
         });
+    }
+
+    public function toDto ($collection)
+    {
+        return $collection -> map(function ($el) {
+            return new ProductDto($el);
+        });
+    }
+
+    public function getPage ($page)
+    {
+        return [
+            'page' => $page -> currentPage(),
+            'count' => $page -> total(),
+            'list' => $this -> toDto(collect($page -> items())),
+        ];
+    }
+
+    public function getProductCard($id)
+    {
+        $product = Product::findOrFail($id);
+        return new ProductCardDto($product);
     }
 }

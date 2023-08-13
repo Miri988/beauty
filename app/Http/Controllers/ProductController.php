@@ -9,6 +9,7 @@ use App\Service\ProductService;
 use App\Service\SearchService;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
+use App\Dto\ProductDto;
 
 class ProductController extends Controller
 {
@@ -24,10 +25,9 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() : Collection
+    public function index(Request $request)
     {
-        $products = Product::all() -> image() -> paginate(15);
-        return $products;
+        return response() -> json($this -> productService -> getPage(Product::paginate(15)));
     }
 
     /**
@@ -60,8 +60,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $product = Product::findOrFail($id) -> image();
-        return response() -> json($product, 201);
+        return response() -> json($this -> productService -> getProductCard($id));
     }
 
     /**
@@ -119,6 +118,4 @@ class ProductController extends Controller
     {
         return $this -> search -> getData();
     }
-
-
 }

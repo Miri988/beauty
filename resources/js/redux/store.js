@@ -6,10 +6,22 @@ const mainData = (state = {}, action) => {
     switch (type) {
      case 'setMainData':
         return {
+            ...state
+        }
+     default:
+      return state
+    }
+}
+
+const searchData = (state = {}, action) => {
+    const { type, payload } = action
+    switch (type) {
+     case 'setSearchData':
+        return {
             ...state,
-            mainData: {
-                loaded: true,
-                newArrival: [1]
+            loaded: true,
+            products: {
+                ...payload
             }
         }
      default:
@@ -18,7 +30,8 @@ const mainData = (state = {}, action) => {
 }
 
 const reducer = combineReducers({
-    mainData
+    mainData,
+    searchData
 })
 
 export const store = configureStore({
@@ -28,6 +41,14 @@ export const store = configureStore({
             loaded: false,
             newArrival: [],
             bestsellers: []
+        },
+        searchData: {
+            loaded: false,
+            products: {
+                page: 1,
+                count: 0,
+                list: []
+            }
         }
     }
 });

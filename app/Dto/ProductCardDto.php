@@ -4,14 +4,18 @@ namespace App\Dto;
 
 use App\Models\Product;
 
-class ProductDto
+class ProductCardDto
 {
     public $id;
     public $title;
     public $price;
     public $rating;
-    public $image;
+    public $images;
     public $description;
+    public $use;
+    public $size;
+    public $specification;
+    public $ingredients;
 
     public function __construct(Product $product)
     {
@@ -20,9 +24,12 @@ class ProductDto
         $this -> price = $product -> price;
         $this -> rating = $product -> rating;
         $this -> description = $product -> description;
-        $images = $product -> images;
-        if ($images -> count() > 0) {
-            $this -> image = $images -> get(0) -> url_img;
-        };
+        $this -> use = $product -> use;
+        $this -> size = $product -> size;
+        $this -> specification = $product -> specification;
+        $this -> ingredients = $product -> ingredients;
+        $this -> images = $product -> images -> map(function ($el) {
+            return $el -> url_img;
+        });
     }
 }

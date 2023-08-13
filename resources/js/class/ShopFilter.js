@@ -1,7 +1,16 @@
 export class ShopFIlter {
     constructor (data) {
+        this.lastUrl = ''
         Object.assign(this, data)
         this.items = (this.items || []).map(v => new FilterItem(v))
+    }
+
+    set () {
+        this.lastUrl = this.queryUrl
+    }
+
+    get queryUrl () {
+        return this.items.filter(v => v.url).map(v => v.url).join('&')
     }
 }
 
@@ -27,6 +36,10 @@ export class FilterItem {
         this.values.forEach(i => {
             i.selected = i === v
         });
+    }
+
+    get url() {
+        return this.values.filter(v => v.selected).map(v => encodeURI(`${this.name}${this.type === FilterItem.T_CHECKBOX ? '[]' : ''}=${v.value}`)).join('&')
     }
 }
 
@@ -100,7 +113,7 @@ export const mainFilter = new ShopFIlter({
                 { title: 'Under $25', value: 1, selected: true },
                 { title: '$25 - $50', value: 2 },
                 { title: '$50 - $100', value: 3 },
-                { title: 'Normal', type: FilterValue.T_RANGE }
+                { title: '> $100', value: 4 }
             ]
         }
     ]

@@ -4,8 +4,8 @@ import bloom_left from "../../assets/images/bloom_left.png";
 import bloom_right from "../../assets/images/bloom_right.png";
 import styles from "./Bestsellers.module.scss";
 
-export const Bestsellers = () => {
-    
+export const Bestsellers = (props) => {
+    const { data } = props;
     return (
         <section className={styles.bestsellers}>
             <div className={`heavier upper header ${styles.header}`}>
@@ -15,18 +15,7 @@ export const Bestsellers = () => {
                 <div className="link subheader">See All</div>
             </div>
             <Slider size={4}>
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
+                {data.map((v,i) => <ItemCard key = {i} {...v}/>)}
             </Slider>
         </section>
     )

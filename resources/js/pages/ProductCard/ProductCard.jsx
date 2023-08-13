@@ -4,16 +4,19 @@ import styles from "./ProductCard.module.scss"
 import { Button } from '../../components/Button/Button.jsx';
 import { Accordion } from '../../components/Accordion/Accordion.jsx';
 import { Slider } from '../../containers/Slider/Slider.jsx';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ItemCard } from '../../containers/ItemCard/ItemCard.jsx';
 import { ReviewFeed } from '../../components/ReviewFeed/ReviewFeed.jsx';
 import bloom_left from "../../assets/images/bloom_left.png";
 import bloom_right from "../../assets/images/bloom_right.png";
+import { Loader } from '../../components/Loader/Loader.jsx';
 
 
-export const ProductCard = () => {
+export const ProductCard = (props) => {
 
   const [activeImage, setActiveImage] = useState(0)
+  const [loaded, setLoaded] = useState(false)
+  const [card, setCard] = useState()
 
   const images = [
     's1.png',
@@ -22,24 +25,40 @@ export const ProductCard = () => {
     's4.png',
     's5.png'
   ]
-
+  
   const { productId } = useParams()
+
+  useEffect(() => {
+    try {
+      const fetchData = async () => {
+        const result = await fetch('http://127.0.0.1:8000/api/products/' + productId)
+        setCard(await result.json())
+        setLoaded(true)
+      }
+      fetchData()
+    } catch (e) {
+      console.log(e)
+    }
+  }, []);
 
   return (
     <div className={styles.main}>
-      <div className="product">
+      { !loaded && <Loader /> }
+      { loaded &&
+        <>
+          <div className="product">
         <div className="preview">
           <Slider size={1} className="basic" initial={activeImage} onChange={(v) => setActiveImage(v)}>
             {
-              images.map((v, i) => <img src={`/images/${v}`} alt="img" key={i} />)
+              card.images.map((v, i) => <img src={v} alt="img" key={i} />)
             }
           </Slider>
           <div className="images">
             {
-              images.map((v, i) => {
+              card.images.map((v, i) => {
                 return <div className={`square image ${i === activeImage ? 'active' : ''}`} key={i} onClick={() => setActiveImage(i)}>
                   <div className="content">
-                    <img src={`/images/${v}`} alt="img" />
+                    <img src={v} alt="img" />
                   </div>
                 </div>
               })
@@ -47,18 +66,18 @@ export const ProductCard = () => {
           </div>
         </div>
         <div className="info">
-          <div className={`header ${styles.header}`}>Dewy Glow Jelly Cream</div>
+          <div className={`header ${styles.header}`}>{ card.title }</div>
           <div className={styles.rate}>
-            <Stars className = {styles.starts}/>
+            <Stars className = {styles.starts} rating = { card.rating } />
             <span className="text">3 reviews</span>
           </div>
-          <div className={styles.price}>26$</div>
-          <div className={styles.description}>A gel moisturizer packed with glow-boosting Cherry Blossom Extracts, visibly brightening niacinamide, and hydrating betaine from sugar beets. Advanced with glycerin and Cherry Blossom flavanoids with visibly soothing and moisturizing benefits for skin that’s ready for makeup! Dermatologist tested.</div>
-          <div className={styles.size}>Size: 50 ml</div>
+          <div className={styles.price}>${ card.price }</div>
+          <div className={styles.description}>{ card.description }</div>
+          <div className={styles.size}>Size: { card.size }</div>
           <Button className={`button wide ${styles.btn}`}>Add To Card</Button>
-          <Accordion className = "secondary" expanded title = "WHAT MAKES IT GOOD">A clear, water-jelly cream with Cherry Blossom and Niacinamide that delivers a burst of hydration and glow for visibly brighter, dewy skin. Key Ingredients Cherry Blossom Flavonoids: visibly soothing Niacinamide: visibly brightening Sugar Beet Betaine: hydrating</Accordion>
-          <Accordion className = "secondary" title = "INGREDIENTS">A clear, water-jelly cream with Cherry Blossom and Niacinamide that delivers a burst of hydration and glow for visibly brighter, dewy skin. Key Ingredients Cherry Blossom Flavonoids: visibly soothing Niacinamide: visibly brightening Sugar Beet Betaine: hydrating</Accordion>
-          <Accordion className = "secondary" title = "HOW TO USE">A clear, water-jelly cream with Cherry Blossom and Niacinamide that delivers a burst of hydration and glow for visibly brighter, dewy skin. Key Ingredients Cherry Blossom Flavonoids: visibly soothing Niacinamide: visibly brightening Sugar Beet Betaine: hydrating</Accordion>
+          <Accordion className = "secondary" expanded title = "WHAT MAKES IT GOOD">{ card.specification }</Accordion>
+          <Accordion className = "secondary" title = "INGREDIENTS">{ card.ingredients}</Accordion>
+          <Accordion className = "secondary" title = "HOW TO USE">{ card.use }</Accordion>
         </div>
       </div>
 
@@ -118,10 +137,9 @@ export const ProductCard = () => {
                 <ItemCard />
           </Slider>
         </div>
-
-        
-
       </div>
+        </>
+      }
     </div>
    
   )

@@ -20,16 +20,20 @@ export const Main = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await fetch('http://127.0.0.1:8000/api/products/new_arrival')
-        mainData.newArrival = await result.json()
-        mainData.loaded = true
-        setLoaded(true)
+        const resultArr = fetch('http://127.0.0.1:8000/api/products/new_arrival');
+        const resultBest = fetch('http://127.0.0.1:8000/api/products/bestsellers');
+        const [ dataArr, dataBest ] = await Promise.all([resultArr, resultBest])
+        mainData.newArrival = await dataArr.json();
+        mainData.bestsellers = await dataBest.json();
+        mainData.loaded = true;
+        setLoaded(true);
       } catch (e) {
-        alert(e)
+        console.log(e)
       }
     }
     !mainData.loaded && fetchData()
   }, []);
+
 // const r = await fetch('http://127.0.0.1:8000/api/products/new_arrival')
 //   const j = await r.json()
 //   mainData.loaded = true
@@ -70,8 +74,8 @@ export const Main = () => {
       {
         loaded && <>
           <UpperBanner />
-          <Arrivals data={mainData.newArrival}/>
-          <Bestsellers/>
+          <Arrivals data={mainData.newArrival} />
+          <Bestsellers data={mainData.bestsellers}/>
           <div className = "kits">
             <Kits data={kits1} />
             <Kits data={kits2} />

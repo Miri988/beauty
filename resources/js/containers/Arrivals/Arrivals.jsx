@@ -6,7 +6,6 @@ import styles from "./Arrivals.module.scss"
 
 export const Arrivals = (props) => {
     const { data } = props;
-    console.log(data);
     return (
         <section className={styles.arrivals}>
             <div className={`heavier upper header ${styles.header}`}>
