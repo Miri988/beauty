@@ -4,8 +4,9 @@ import bloom_left from "../../assets/images/bloom_left.png";
 import bloom_right from "../../assets/images/bloom_right.png";
 import styles from "./Arrivals.module.scss"
 
-export const Arrivals = () => {
-    
+export const Arrivals = (props) => {
+    const { data } = props;
+    console.log(data);
     return (
         <section className={styles.arrivals}>
             <div className={`heavier upper header ${styles.header}`}>
@@ -14,19 +15,9 @@ export const Arrivals = () => {
                 <img src = {bloom_right} alt = ""/>
                 <div className="link subheader">See All</div>
             </div>
+
             <Slider size={4}>
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
+                {data.map((v,i) => <ItemCard key = {i} {...v}/>)}
             </Slider>
         </section>
     )

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Service\NewService;
 use App\Service\BestService;
+use App\Service\ProductService;
 use App\Service\SearchService;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
@@ -12,14 +13,12 @@ use Illuminate\Database\Eloquent\Collection;
 class ProductController extends Controller
 {
 
-    protected $newService;
-    protected $bestService;
+    protected $productService;
     protected $search;
 
-    public function __construct(NewService $newService, BestService $bestService, SearchService $search)
+    public function __construct(ProductService $productService, SearchService $search)
     {
-        $this -> newService = $newService;
-        $this -> bestService = $bestService;
+        $this -> productService = $productService;
         $this -> search = $search;
     }
     /**
@@ -106,14 +105,14 @@ class ProductController extends Controller
         //
     }
 
-    public function newArrival (Product $product)
+    public function newArrival ()
     {
-        return $this -> newService -> getData();
+        return $this -> productService -> getNewArrivals();
     }
 
     public function bestSellers (Product $product)
     {
-        return $this -> bestService -> getData();
+        return $this -> productService -> getBestsellers();
     }
 
     public function search (Product $product)

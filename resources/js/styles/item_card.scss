@@ -16,6 +16,14 @@
         }
         >.description {
             color: #697586;
+            line-height: 1.3em;
+            height: 3.9em;
+            overflow: hidden;
+        }
+        >.header {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
     &:hover {

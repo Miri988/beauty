@@ -26,7 +26,8 @@ export const store = configureStore({
     preloadedState: {
         mainData: {
             loaded: false,
-            newArrival: []
+            newArrival: [],
+            bestsellers: []
         }
     }
 });

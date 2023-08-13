@@ -8,16 +8,33 @@ import { UpperBanner } from "../../containers/UpperBanner/UpperBanner";
 import IMAGEkits from "../../assets/images/IMAGEkits.png";
 import IMAGEkits2 from "../../assets/images/IMAGEkits2.png";
 import { useSelector } from "react-redux";
-
+import { Loader } from "../../components/Loader/Loader.jsx";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export const Main = () => {
 
   const mainData = useSelector(s => s.mainData)
-  // const r = await fetch('http://127.0.0.1:8000/api/products/new_arrival')
-  // const j = await r.json()
-  // mainData.loaded = true
-  // mainData.newArrivals = j
-  // console.log(mainData);
+  const [loaded, setLoaded] = useState(mainData.loaded)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await fetch('http://127.0.0.1:8000/api/products/new_arrival')
+        mainData.newArrival = await result.json()
+        mainData.loaded = true
+        setLoaded(true)
+      } catch (e) {
+        alert(e)
+      }
+    }
+    !mainData.loaded && fetchData()
+  }, []);
+// const r = await fetch('http://127.0.0.1:8000/api/products/new_arrival')
+//   const j = await r.json()
+//   mainData.loaded = true
+//   mainData.newArrivals = j
+//   console.log(mainData);  
 
   const kits1 = {
     header: 'Blossom Glow Kit',
@@ -49,16 +66,21 @@ export const Main = () => {
 
   return (
     <div className = "main">
-      <UpperBanner />
-      <Arrivals/>
-      <Bestsellers/>
-      <div className = "kits">
-        <Kits data={kits1} />
-        <Kits data={kits2} />
-      </div> 
-      <Blog/>
-      <Quiz/> 
-      <Insta/> 
+      { !loaded && <Loader /> }
+      {
+        loaded && <>
+          <UpperBanner />
+          <Arrivals data={mainData.newArrival}/>
+          <Bestsellers/>
+          <div className = "kits">
+            <Kits data={kits1} />
+            <Kits data={kits2} />
+          </div> 
+          <Blog/>
+          <Quiz/> 
+          <Insta/>
+        </>
+      } 
     </div>
   )
 }

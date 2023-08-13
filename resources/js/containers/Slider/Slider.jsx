@@ -6,7 +6,7 @@ export const Slider = (props) => {
     const [shift, setShift] = useState(100 * -1 * initial)
     const slides = Array(Math.ceil(children.length / (size ?? 1))).fill().map((_v, i) => {
         return <div className="slide" key={i}>
-            {children.slice(i, i + size)}
+            {children.slice(i * size, i * size + size).map((v, i) => <div className="slide-item" key={i}>{v}</div>)}
         </div>
     })
 

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Product extends Model
 {
@@ -42,8 +43,12 @@ class Product extends Model
         return $this -> hasMany (Order::class);
     }
 
-    public function image (): MorphMany
-    {
-        return $this -> morphMany (Image::class, 'imgable');
+    // public function image (): MorphOne
+    // {
+    //     return $this -> morphOne (Image::class, 'imgable');
+    // }
+
+    public function images() {
+        return $this->hasMany(Image::class, 'imgable_id');
     }
 }
