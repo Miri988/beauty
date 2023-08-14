@@ -44,6 +44,10 @@ Route::get('/products/new_arrival', [ProductController::class, 'newArrival']);
 
 Route::get('/products/bestsellers', [ProductController::class, 'bestSellers']);
 
+Route::get('/products/view_products', [ProductController::class, 'viewProducts']);
+
+Route::get('/products/may_like_products', [ProductController::class, 'mayLikeProducts']);
+
 Route::get('/products/search', [ProductController::class, 'search']);
 
 //mail

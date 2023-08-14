@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Service\NewService;
-use App\Service\BestService;
 use App\Service\ProductService;
 use App\Service\SearchService;
 use Illuminate\Http\Request;
@@ -109,9 +107,19 @@ class ProductController extends Controller
         return $this -> productService -> getNewArrivals();
     }
 
-    public function bestSellers (Product $product)
+    public function bestsellers (Product $product)
     {
-        return $this -> productService -> getBestsellers();
+        return $this -> productService -> getbestsellers();
+    }
+
+    public function viewProducts (Product $product)
+    {
+        return $this -> productService -> getViewProducts();
+    }
+
+    public function mayLikeProducts (Product $product)
+    {
+        return $this -> productService -> getMayLikeProducts();
     }
 
     public function search (Product $product)

@@ -40,7 +40,9 @@ export const store = configureStore({
         mainData: {
             loaded: false,
             newArrival: [],
-            bestsellers: []
+            bestsellers: [],
+            viewproducts: [],
+            maylikeproducts: [],
         },
         searchData: {
             loaded: false,

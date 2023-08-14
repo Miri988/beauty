@@ -53,4 +53,20 @@ class ProductService
         $product = Product::findOrFail($id);
         return new ProductCardDto($product);
     }
+
+    public function getViewProducts ()
+    {
+        return Product::inRandomOrder() -> take(4) -> get() -> map(function ($el) {
+            return new ProductDto($el);
+        });
+    }
+
+    public function getMayLikeProducts ()
+    {
+        return Product::inRandomOrder() -> take(8) -> get() -> map(function ($el) {
+            return new ProductDto($el);
+        });
+    }
+
+
 }

@@ -10,29 +10,29 @@ import { ReviewFeed } from '../../components/ReviewFeed/ReviewFeed.jsx';
 import bloom_left from "../../assets/images/bloom_left.png";
 import bloom_right from "../../assets/images/bloom_right.png";
 import { Loader } from '../../components/Loader/Loader.jsx';
+import { useSelector } from 'react-redux';
 
 
 export const ProductCard = (props) => {
 
-  const [activeImage, setActiveImage] = useState(0)
-  const [loaded, setLoaded] = useState(false)
-  const [card, setCard] = useState()
-
-  const images = [
-    's1.png',
-    's2.png',
-    's3.png',
-    's4.png',
-    's5.png'
-  ]
+  const [activeImage, setActiveImage] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+  const [card, setCard] = useState();
+  const mainData = useSelector(s => s.mainData)
   
-  const { productId } = useParams()
+  const { productId } = useParams();
 
   useEffect(() => {
     try {
       const fetchData = async () => {
         const result = await fetch('http://127.0.0.1:8000/api/products/' + productId)
         setCard(await result.json())
+        const resultView = fetch('http://127.0.0.1:8000/api/products/view_products');
+        const resultLike = fetch('http://127.0.0.1:8000/api/products/may_like_products');
+        const [ dataView, dataLike ] = await Promise.all([resultView, resultLike])
+        mainData.viewproducts = await dataView.json();
+        mainData.maylikeproducts = await dataLike.json();
+        mainData.loaded = true;
         setLoaded(true)
       }
       fetchData()
@@ -107,10 +107,7 @@ export const ProductCard = (props) => {
             </div>
           </div>
           <div className={styles.grid}>
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
-            <ItemCard />
+            {mainData.viewproducts.map((v,i) => <ItemCard key = {i} {...v}/>)}
           </div>
         </div>
         <div className={styles.like}>
@@ -123,18 +120,7 @@ export const ProductCard = (props) => {
            </div>
            </div>
           <Slider size={4}>
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
-                <ItemCard />
+            {mainData.maylikeproducts.map((v,i) => <ItemCard key = {i} {...v}/>)}
           </Slider>
         </div>
       </div>

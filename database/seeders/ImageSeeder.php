@@ -143,6 +143,37 @@ class ImageSeeder extends Seeder
                 'imgable_type' => 'App/Model/Product',
                 'imgable_id' => 3,
             ],
+            [
+                'url_img' => '/assets/images/products/k1_1.jpg',
+                'imgable_type' => 'App/Model/Product',
+                'imgable_id' => 1,
+            ],
+            [
+                'url_img' => '/assets/images/products/k7_1.jpg',
+                'imgable_type' => 'App/Model/Product',
+                'imgable_id' => 7,
+            ],
+            [
+                'url_img' => '/assets/images/products/k4_1.jpg',
+                'imgable_type' => 'App/Model/Product',
+                'imgable_id' => 4,
+            ],
+            [
+                'url_img' => '/assets/images/products/k10_1.jpg',
+                'imgable_type' => 'App/Model/Product',
+                'imgable_id' => 10,
+            ],
+            [
+                'url_img' => '/assets/images/products/k10_2.jpg',
+                'imgable_type' => 'App/Model/Product',
+                'imgable_id' => 10,
+            ],
+            [
+                'url_img' => '/assets/images/products/k11_1.jpg',
+                'imgable_type' => 'App/Model/Product',
+                'imgable_id' => 11,
+            ],
+
         ]);
     }
 }
